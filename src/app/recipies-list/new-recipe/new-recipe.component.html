@@ -1,0 +1,53 @@
+
+<h1>Add New Recipe</h1>
+<div>
+    <span>Name of Recipe:</span>
+    <input type="text" [(ngModel)]="newRecipe.title">
+</div>
+
+<div>
+    <span>Instructions:</span>
+    <input type="text" [(ngModel)]="newRecipe.instructions">
+</div>
+
+<div>
+    <button (click)="addIngredient()">Add New Ingredient</button>
+</div>
+
+
+<ng-container *ngIf="newRecipe">
+    <div *ngFor="let ingredient of newRecipe.ingredients; let ingredientIndex = index">
+        <div>
+            <span>Item Name:</span>
+            <input type="text" [(ngModel)]="ingredient.itemName">
+        </div>
+        <div>
+            <span>Quantity:</span>
+            <input type="number" [(ngModel)]="ingredient.quantity">
+        </div>
+        <div>
+            <span>Quantity Type:</span>
+            <div *ngFor="let quantityType of quantityTypeEnum; let i = index">
+                <input type="radio" id="{{ ingredientIndex }} - {{ i }}" name="{{ ingredientIndex }} - {{ i }}" [value]="quantityType" [(ngModel)]="ingredient.quantityType">
+                <label for="{{ ingredientIndex }} - {{ i }}">{{ quantityType }} </label>
+            </div>
+            <!-- <input type="radio" id="age1" name="type" value="30">
+            <label for="age1">0 - 30</label>
+    
+            <br>
+            <input type="radio" id="age2" name="type" value="60">
+            <label for="age2">31 - 60</label>
+    
+            <br>  
+            <input type="radio" id="age3" name="type" value="100">
+            <label for="age3">61 - 100</label> -->
+            <br>
+            <br>
+    
+        </div>
+    </div>
+
+    <div>   
+        <button (click)="addNewRecipe()">Submit</button>
+    </div>
+</ng-container>

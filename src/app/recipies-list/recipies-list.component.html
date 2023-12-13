@@ -1,0 +1,26 @@
+<button (click)="addRecipe()">Add New Recipe</button>
+
+<router-outlet></router-outlet>
+
+<div>
+    <span>Serving Size:</span>
+    <input type="number" [(ngModel)]="servingSize">
+</div>
+
+<h1>List of Recipes: </h1>
+<div *ngFor="let recipe of recipes; let i = index">
+    {{ recipe.title }}
+    <button (click)="viewRecipe(recipe)">
+        <span *ngIf="selectedRecipe && selectedRecipe.recipeId === recipe.recipeId">Hide</span>
+        <span *ngIf="!selectedRecipe || selectedRecipe.recipeId !== recipe.recipeId">View</span>
+        <span>Recipe</span>
+        
+    </button>
+    <button (click)="deleteRecipe(recipe)">Delete Recipe</button>
+    <div *ngIf="selectedRecipe && selectedRecipe.recipeId === recipe.recipeId">
+        <app-recipe [recipe]="recipe" [servingSize]="servingSize"></app-recipe>
+    </div>
+
+</div>
+
+
